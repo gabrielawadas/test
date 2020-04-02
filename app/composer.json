@@ -29,12 +29,14 @@
         "symfony/twig-pack": "^1.0",
         "symfony/validator": "5.0.*",
         "symfony/web-link": "5.0.*",
-        "symfony/yaml": "5.0.*"
+        "symfony/yaml": "5.0.*",
+        "twig/intl-extra": "^3.0"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.3",
         "escapestudios/symfony2-coding-standard": "^3.11",
         "friendsofphp/php-cs-fixer": "^2.16",
+        "fzaninotto/faker": "^1.9",
         "phpmd/phpmd": "^2.8",
         "squizlabs/php_codesniffer": "^3.5",
         "symfony/debug-pack": "*",
@@ -42,7 +44,8 @@
         "symfony/stopwatch": "*",
         "symfony/test-pack": "*",
         "symfony/twig-bundle": "*",
-        "symfony/web-profiler-bundle": "*"
+        "symfony/web-profiler-bundle": "*",
+        "symfony/web-server-bundle": "4.4.2"
     },
     "config": {
         "preferred-install": {
