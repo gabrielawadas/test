@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Wallet{% endblock %}
+
+{% block body %}
+    <h1>Create new Wallet</h1>
+
+    {{ include('wallet/_form.html.twig') }}
+
+    <a href="{{ path('wallet_index') }}">back to list</a>
+{% endblock %}

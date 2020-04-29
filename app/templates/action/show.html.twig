@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Action{% endblock %}
+
+{% block body %}
+    <h1>Action</h1>
+
+    <table class="table">
+        <tbody>
+
+            <tr>
+                <th>Name</th>
+                <td>{{ action.name }}</td>
+            </tr>
+            <tr>
+                <th>Amount</th>
+                <td>{{ action.amount }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+
+    <a href="{{ path('action_edit', {'id': action.id}) }}">edit</a>
+
+    {{ include('action/_delete_form.html.twig') }}
+{% endblock %}

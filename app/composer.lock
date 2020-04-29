@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "19532d907a2708185eeae8575a5a4821",
+    "content-hash": "e950c7bd6d9edc706c7d23e72422a9fd",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1537,6 +1537,178 @@
                 "psr-3"
             ],
             "time": "2019-12-20T14:22:59+00:00"
+        },
+        {
+            "name": "msgphp/domain",
+            "version": "v0.15.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/msgphp/domain.git",
+                "reference": "d247ef7786b55479863ad35915562fe6fd9661b1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/msgphp/domain/zipball/d247ef7786b55479863ad35915562fe6fd9661b1",
+                "reference": "d247ef7786b55479863ad35915562fe6fd9661b1",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2"
+            },
+            "require-dev": {
+                "doctrine/orm": "^2.6",
+                "ramsey/uuid": "^3.7",
+                "symfony/messenger": "^4.4 || ^5.0",
+                "symfony/var-exporter": "^4.4 || ^5.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.15-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "MsgPhp\\Domain\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Roland Franssen",
+                    "email": "franssen.roland@gmail.com"
+                }
+            ],
+            "description": "A dependency-free package to help building a business domain layer",
+            "keywords": [
+                "command query responsibility segregation",
+                "cqrs",
+                "ddd",
+                "domain model",
+                "domain-driven-design",
+                "entity",
+                "es",
+                "event sourcing",
+                "orm",
+                "repository",
+                "rich domain model"
+            ],
+            "time": "2020-03-08T14:38:20+00:00"
+        },
+        {
+            "name": "msgphp/user",
+            "version": "v0.15.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/msgphp/user.git",
+                "reference": "f551d098907d089d81e7c8c6d94aba90f04aca6a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/msgphp/user/zipball/f551d098907d089d81e7c8c6d94aba90f04aca6a",
+                "reference": "f551d098907d089d81e7c8c6d94aba90f04aca6a",
+                "shasum": ""
+            },
+            "require": {
+                "msgphp/domain": "^0.15"
+            },
+            "require-dev": {
+                "doctrine/orm": "^2.6",
+                "symfony/form": "^3.4.24 || ^4.4 || ^5.0",
+                "symfony/messenger": "^4.4 || ^5.0",
+                "symfony/security-core": "^3.4 || ^4.4 || ^5.0",
+                "symfony/validator": "^3.4 || ^4.4 || ^5.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.15-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "MsgPhp\\User\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Roland Franssen",
+                    "email": "franssen.roland@gmail.com"
+                }
+            ],
+            "description": "A domain layer providing basic user management",
+            "keywords": [
+                "ddd",
+                "domain-driven-design",
+                "rich domain model",
+                "security",
+                "user"
+            ],
+            "time": "2020-03-08T14:41:47+00:00"
+        },
+        {
+            "name": "msgphp/user-bundle",
+            "version": "v0.15.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/msgphp/user-bundle.git",
+                "reference": "1c996574fe116f49c86f18a8881278740835f296"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/msgphp/user-bundle/zipball/1c996574fe116f49c86f18a8881278740835f296",
+                "reference": "1c996574fe116f49c86f18a8881278740835f296",
+                "shasum": ""
+            },
+            "require": {
+                "msgphp/user": "^0.15",
+                "symfony/config": "^3.4 || ^4.4 || ^5.0",
+                "symfony/dependency-injection": "^3.4 || ^4.4 || ^5.0",
+                "symfony/http-kernel": "^3.4 || ^4.4 || ^5.0"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.15-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "MsgPhp\\UserBundle\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Roland Franssen",
+                    "email": "franssen.roland@gmail.com"
+                }
+            ],
+            "description": "Basic user management (the `User` domain)",
+            "keywords": [
+                "security",
+                "user"
+            ],
+            "time": "2020-03-08T13:52:10+00:00"
         },
         {
             "name": "ocramius/package-versions",
@@ -7301,6 +7473,7 @@
                 "monolog",
                 "productivity"
             ],
+            "abandoned": true,
             "time": "2019-10-24T07:13:31+00:00"
         },
         {
@@ -8156,20 +8329,6 @@
                 "generator",
                 "scaffold",
                 "scaffolding"
-            ],
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
             ],
             "time": "2020-03-04T13:57:29+00:00"
         },
