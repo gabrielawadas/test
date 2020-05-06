@@ -15,12 +15,18 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class ActionType extends AbstractType
 {
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('name')
             ->add('amount')
             ->add('wallet')
+            ->add('category')
+
         ;
     }
 

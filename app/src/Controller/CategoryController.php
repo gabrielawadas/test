@@ -1,7 +1,4 @@
 <?php
-/**
- * Category controller.
- */
 
 namespace App\Controller;
 
@@ -94,4 +91,7 @@ class CategoryController extends AbstractController
 
         return $this->redirectToRoute('category_index');
     }
+
+
+
 }

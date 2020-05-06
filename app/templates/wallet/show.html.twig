@@ -37,6 +37,7 @@
 
             <th>Name</th>
             <th>Amount</th>
+            <th>Category</th>
             <th>actions</th>
         </tr>
         </thead>
@@ -46,7 +47,7 @@
 
                 <td>{{ actions.name }}</td>
                 <td>{{ actions.amount }}</td>
-
+                <td>{{ actions.category }}</td>
                 <td>
                     <a href="{{ path('action_show', {'id': actions.id}) }}">show</a>
                     <a href="{{ path('action_edit', {'id': actions.id}) }}">edit</a>

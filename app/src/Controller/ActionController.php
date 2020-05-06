@@ -8,7 +8,6 @@ namespace App\Controller;
  * Action Controller.
  */
 use App\Entity\Action;
-use App\Form\Action1Type;
 use App\Form\ActionType;
 use App\Repository\ActionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -44,8 +43,7 @@ class ActionController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($action);
             $entityManager->flush();
-
-            return $this->redirectToRoute('action_index');
+            return $this->redirectToRoute('wallet_index');
         }
 
         return $this->render('action/new.html.twig', [

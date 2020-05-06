@@ -36,12 +36,28 @@ class Action
     private $wallet;
 
     /**
-     * @return int|null
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="action")
      */
-    public function getId(): ?int
-    {
+    private $category;
+
+
+
+
+
+    /**
+     * @return mixed
+     */
+    public function getId() {
         return $this->id;
     }
+
+    /**
+     * @param $id
+     */
+    public function setId($id) {
+        $this->id= $id;
+    }
+
 
     /**
      * @return string|null
@@ -99,5 +115,32 @@ class Action
 
         return $this;
     }
+
+    /**
+     * @return Category|null
+     */
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    /**
+     * @param Category|null $category
+     * @return $this
+     */
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+
+
+
+
+
+
+
 
 }
