@@ -40,6 +40,11 @@ class Action
      */
     private $category;
 
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $date;
+
 
 
 
@@ -135,7 +140,35 @@ class Action
         return $this;
     }
 
+    /**
+     * @return \DateTimeInterface|null
+     */
+    public function getDate(): ?\DateTimeInterface
+    {
+        return $this->date;
+    }
 
+    /**
+     * @param \DateTimeInterface|null $date
+     * @return $this
+     */
+    public function setDate(?\DateTimeInterface $date): self
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Generates the magic method.
+     */
+    public function __toString()
+    {
+        // to show the name of the Category in the select
+        return $this->name;
+        // to show the id of the Category in the select
+        // return $this->id;
+    }
 
 
 

@@ -16,12 +16,18 @@
                 <th>Amount</th>
                 <td>{{ action.amount }}</td>
             </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ action.date|date("m/d/Y")}}</td>
+            </tr>
         </tbody>
     </table>
 
 
 
-    <a href="{{ path('action_edit', {'id': action.id}) }}">edit</a>
+    <a href="{{ path('action_edit', {'id': action.id}) }}" class="btn btn-outline-danger">Edit action</a><br><br>
+
+    <a href="{{ path('wallet_index') }}" class="btn btn-outline-success">Back to wallets</a>
 
     {{ include('action/_delete_form.html.twig') }}
 {% endblock %}

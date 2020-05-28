@@ -1,6 +1,6 @@
 <?php
 /**
- * LoginFormAuthenticator
+ * LoginFormAuthenticator.
  */
 
 namespace App\Security;
@@ -24,8 +24,7 @@ use Symfony\Component\Security\Guard\PasswordAuthenticatedInterface;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
 /**
- * Class LoginFormAuthenticator
- * @package App\Security
+ * Class LoginFormAuthenticator.
  */
 class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements PasswordAuthenticatedInterface
 {
@@ -38,10 +37,6 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
 
     /**
      * LoginFormAuthenticator constructor.
-     * @param EntityManagerInterface $entityManager
-     * @param UrlGeneratorInterface $urlGenerator
-     * @param CsrfTokenManagerInterface $csrfTokenManager
-     * @param UserPasswordEncoderInterface $passwordEncoder
      */
     public function __construct(EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager, UserPasswordEncoderInterface $passwordEncoder)
     {
@@ -52,7 +47,6 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
     }
 
     /**
-     * @param Request $request
      * @return bool
      */
     public function supports(Request $request)
@@ -62,7 +56,6 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
     }
 
     /**
-     * @param Request $request
      * @return array|mixed
      */
     public function getCredentials(Request $request)
@@ -82,7 +75,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
 
     /**
      * @param mixed $credentials
-     * @param UserProviderInterface $userProvider
+     *
      * @return object|UserInterface|null
      */
     public function getUser($credentials, UserProviderInterface $userProvider)
@@ -104,7 +97,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
 
     /**
      * @param mixed $credentials
-     * @param UserInterface $user
+     *
      * @return bool
      */
     public function checkCredentials($credentials, UserInterface $user)
@@ -121,10 +114,10 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
     }
 
     /**
-     * @param Request $request
-     * @param TokenInterface $token
      * @param string $providerKey
+     *
      * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response|null
+     *
      * @throws \Exception
      */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
@@ -133,7 +126,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
             return new RedirectResponse($targetPath);
         }
 
-            return new RedirectResponse($this->urlGenerator->generate('wallet_index'));
+        return new RedirectResponse($this->urlGenerator->generate('wallet_index'));
     }
 
     /**

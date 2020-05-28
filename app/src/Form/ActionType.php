@@ -26,6 +26,7 @@ class ActionType extends AbstractType
             ->add('amount')
             ->add('wallet')
             ->add('category')
+            ->add('date')
 
         ;
     }

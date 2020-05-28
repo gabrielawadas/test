@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
     {% endblock %}
 </head>
-<body>
+<body class="bg-light m-2">
 {% if app.user %}
     <div class="mb-3">
         You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>

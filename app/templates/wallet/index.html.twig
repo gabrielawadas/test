@@ -1,9 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Wallet index{% endblock %}
+{% block title %}Wallets{% endblock %}
 
 {% block body %}
-    <h1>Wallet index</h1>
+    <h1>Wallets</h1>
+    <a href="{{ path('wallet_new') }}" class="btn btn-outline-primary">Create new</a><br><br>
 
     <table class="table">
         <thead>
@@ -35,22 +36,26 @@
         </tbody>
     </table>
 
-    <a href="{{ path('wallet_new') }}">Create new</a>
 
 
-    <h1>New action</h1>
+<div class="row">
 
-    <a href="{{ path('action_new') }}">Create new</a>
+    <div class="col">
+        <a href="{{ path('action_new') }}" class="btn btn-outline-primary">New action</a>
+    </div>
 
-    <h1>Actions list</h1>
+    <div class="col">
+        <a href="{{ path('action_index') }}" class="btn btn-outline-danger">Action list</a>
+    </div>
 
-    <a href="{{ path('action_index') }}">Show list</a>
+    <div class="col">
+        <a href="{{ path('category_new') }}" class="btn btn-outline-success">New category</a>
+    </div>
 
+    <div class="col">
 
-    <h1>New category</h1>
-
-    <a href="{{ path('category_new') }}">Create new</a>
-
-
+    <a href="{{ path('user_index') }}"class="btn btn-outline-info">Admin details</a>
+   </div>
+</div>
 
 {% endblock %}

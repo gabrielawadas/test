@@ -5,9 +5,10 @@
 {% block body %}
     <h1>Edit Action</h1>
 
-    {{ include('action/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('action/_form.html.twig',{'button_label': 'Update'}) }}
 
-    <a href="{{ path('wallet_index') }}">back to list</a>
 
-    {{ include('action/_delete_form.html.twig') }}
+    {{ include('action/_delete_form.html.twig') }}<br>
+
+    <a href="{{ path('wallet_index') }}" class="btn btn-outline-success">Back to wallets</a>
 {% endblock %}

@@ -5,7 +5,7 @@
 {% block body %}
     <h1>Create new Action</h1>
 
-    {{ include('action/_form.html.twig') }}
+    {{ include('action/_form.html.twig') }}<br>
 
-    <a href="{{ path('wallet_index') }}">back to list</a>
+    <a href="{{ path('wallet_index') }}" class="btn btn-outline-success">Back to wallets</a>
 {% endblock %}

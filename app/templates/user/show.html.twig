@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User{% endblock %}
+
+{% block body %}
+    <h1>User</h1>
+
+    <table class="table">
+        <tbody>
+
+            <tr>
+                <th>Email</th>
+                <td>{{ user.email }}</td>
+            </tr>
+
+            <tr>
+                <th>Password</th>
+                <td>{{ user.password }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+
+    <a href="{{ path('user_edit', {'id': user.id}) }}" class="btn btn-outline-danger">edit</a><br><br>
+
+    <a href="{{ path('wallet_index') }}" class="btn btn-outline-success">Back to wallets</a>
+{% endblock %}

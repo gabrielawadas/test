@@ -10,6 +10,8 @@
             <tr>
                 <th>Name</th>
                 <th>Amount</th>
+                <th>Date</th>
+                <th>Category</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -19,6 +21,8 @@
 
                 <td>{{ action.name }}</td>
                 <td>{{ action.amount }}</td>
+                <td>{{ action.date|date("m/d/Y") }}</td>
+                <td>{{ action.category }}</td>
                 <td>
                     <a href="{{ path('action_show', {'id': action.id}) }}">show</a>
                     <a href="{{ path('action_edit', {'id': action.id}) }}">edit</a>
@@ -32,5 +36,6 @@
         </tbody>
     </table>
 
-    <a href="{{ path('action_new') }}">Create new</a>
+    <a href="{{ path('action_new') }}" class="btn btn-outline-primary">Create new</a><br><br>
+    <a href="{{ path('wallet_index') }}" class="btn btn-outline-success">Back to wallets</a>
 {% endblock %}
