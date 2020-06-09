@@ -1,12 +1,12 @@
 <?php
 /**
- * LoginFormAuthenticator.
+ * Login form authenticator.
  */
 
 namespace App\Security;
 
 use App\Entity\User;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -30,35 +30,75 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
 {
     use TargetPathTrait;
 
-    private $entityManager;
+    /**
+     * User repository.
+     *
+     * @var \App\Repository\UserRepository
+     */
+    private $userRepository;
+
+    /**
+     * URL generator.
+     *
+     * @var \Symfony\Component\Routing\Generator\UrlGeneratorInterface
+     */
     private $urlGenerator;
+
+    /**
+     * CSRF token manager.
+     *
+     * @var \Symfony\Component\Security\Csrf\CsrfTokenManagerInterface
+     */
     private $csrfTokenManager;
+
+    /**
+     * Password encoder.
+     *
+     * @var \Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface
+     */
     private $passwordEncoder;
 
     /**
      * LoginFormAuthenticator constructor.
+     *
+     * @param \App\Repository\UserRepository                                        $userRepository   User repository
+     * @param \Symfony\Component\Routing\Generator\UrlGeneratorInterface            $urlGenerator     URL generator
+     * @param \Symfony\Component\Security\Csrf\CsrfTokenManagerInterface            $csrfTokenManager CSRF token manager
+     * @param \Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface $passwordEncoder  Password encoder
      */
-    public function __construct(EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager, UserPasswordEncoderInterface $passwordEncoder)
+    public function __construct(UserRepository $userRepository, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager, UserPasswordEncoderInterface $passwordEncoder)
     {
-        $this->entityManager = $entityManager;
+        $this->userRepository = $userRepository;
         $this->urlGenerator = $urlGenerator;
         $this->csrfTokenManager = $csrfTokenManager;
         $this->passwordEncoder = $passwordEncoder;
     }
 
     /**
-     * @return bool
+     * Does the authenticator support the given Request?
+     *
+     * If this returns false, the authenticator will be skipped.
+     *
+     * @param Request $request HTTP request
+     *
+     * @return bool Result
      */
-    public function supports(Request $request)
+    public function supports(Request $request): bool
     {
         return 'app_login' === $request->attributes->get('_route')
             && $request->isMethod('POST');
     }
 
     /**
-     * @return array|mixed
+     * Get the authentication credentials from the request and return them
+     * as any type (e.g. an associate array). If you return null, authentication
+     * will be skipped.
+     *
+     * @param Request $request HTTP request
+     *
+     * @return array Credential array
      */
-    public function getCredentials(Request $request)
+    public function getCredentials(Request $request): array
     {
         $credentials = [
             'email' => $request->request->get('email'),
@@ -74,18 +114,21 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
     }
 
     /**
-     * @param mixed $credentials
+     * Get user.
      *
-     * @return object|UserInterface|null
+     * @param mixed                                                       $credentials  Credentials
+     * @param \Symfony\Component\Security\Core\User\UserProviderInterface $userProvider User provider
+     *
+     * @return \App\Entity\User|null Result
      */
-    public function getUser($credentials, UserProviderInterface $userProvider)
+    public function getUser($credentials, UserProviderInterface $userProvider): ?User
     {
         $token = new CsrfToken('authenticate', $credentials['csrf_token']);
         if (!$this->csrfTokenManager->isTokenValid($token)) {
             throw new InvalidCsrfTokenException();
         }
 
-        $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $credentials['email']]);
+        $user = $this->userRepository->findOneBy(['email' => $credentials['email']]);
 
         if (!$user) {
             // fail authentication with a custom error
@@ -96,17 +139,24 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
     }
 
     /**
-     * @param mixed $credentials
+     * Checks credentials.
      *
-     * @return bool
+     * @param mixed                                               $credentials Credentials
+     * @param \Symfony\Component\Security\Core\User\UserInterface $user        User
+     *
+     * @return bool Result
      */
-    public function checkCredentials($credentials, UserInterface $user)
+    public function checkCredentials($credentials, UserInterface $user): bool
     {
         return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
     }
 
     /**
      * Used to upgrade (rehash) the user's password automatically over time.
+     *
+     * @param array $credentials User credentials
+     *
+     * @return string|null Hashed password
      */
     public function getPassword($credentials): ?string
     {
@@ -114,25 +164,31 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
     }
 
     /**
-     * @param string $providerKey
+     * Called when authentication executed and was successful!
      *
-     * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response|null
+     * @param \Symfony\Component\HttpFoundation\Request                            $request     HTTP request
+     * @param \Symfony\Component\Security\Core\Authentication\Token\TokenInterface $token       Authentication token
+     * @param string                                                               $providerKey The key of the firewall
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse Redirect response
      *
      * @throws \Exception
      */
-    public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
+    public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey): RedirectResponse
     {
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
             return new RedirectResponse($targetPath);
         }
 
-        return new RedirectResponse($this->urlGenerator->generate('wallet_index'));
+        return new RedirectResponse($this->urlGenerator->generate('task_index'));
     }
 
     /**
-     * @return string
+     * Return the URL to the login page.
+     *
+     * @return string Login URL
      */
-    protected function getLoginUrl()
+    protected function getLoginUrl(): string
     {
         return $this->urlGenerator->generate('app_login');
     }

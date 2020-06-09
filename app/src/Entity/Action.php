@@ -37,6 +37,7 @@ class Action
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="action")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
      */
     private $category;
 
@@ -44,10 +45,6 @@ class Action
      * @ORM\Column(type="date", nullable=true)
      */
     private $date;
-
-
-
-
 
     /**
      * @return mixed
@@ -169,6 +166,8 @@ class Action
         // to show the id of the Category in the select
         // return $this->id;
     }
+
+
 
 
 

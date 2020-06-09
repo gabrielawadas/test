@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
 /**
  * @Route("/wallet")
  */
@@ -22,10 +23,18 @@ class WalletController extends AbstractController
      */
     public function index(WalletRepository $walletRepository): Response
     {
+        $walletRepository = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('App:Wallet');
+
+
         return $this->render('wallet/index.html.twig', [
             'wallets' => $walletRepository->findAll(),
         ]);
+
+
     }
+
 
     /**
      * @Route("/new", name="wallet_new", methods={"GET","POST"})
@@ -93,4 +102,6 @@ class WalletController extends AbstractController
 
         return $this->redirectToRoute('wallet_index');
     }
+
+
 }

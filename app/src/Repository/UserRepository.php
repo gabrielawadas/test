@@ -1,7 +1,4 @@
 <?php
-/**
- * User Repository
- */
 
 namespace App\Repository;
 
@@ -20,10 +17,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
 {
-    /**
-     * UserRepository constructor.
-     * @param ManagerRegistry $registry
-     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, User::class);
@@ -43,13 +36,10 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->flush();
     }
 
-     /**
-      * @return User[] Returns an array of User objects
-     */
-    /**
-     * @param $value
-     * @return mixed
-     */
+    // /**
+    //  * @return User[] Returns an array of User objects
+    //  */
+    /*
     public function findByExampleField($value)
     {
         return $this->createQueryBuilder('u')
@@ -61,13 +51,9 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ->getResult()
         ;
     }
+    */
 
-
-    /**
-     * @param $value
-     * @return User|null
-     * @throws \Doctrine\ORM\NonUniqueResultException
-     */
+    /*
     public function findOneBySomeField($value): ?User
     {
         return $this->createQueryBuilder('u')
@@ -77,5 +63,5 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ->getOneOrNullResult()
         ;
     }
-
+    */
 }

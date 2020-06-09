@@ -8,12 +8,39 @@
         <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
     {% endblock %}
 </head>
-<body class="bg-light m-2">
-{% if app.user %}
-    <div class="mb-3">
-        You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+<body class="bg-light">
+
+<nav class="navbar navbar-expand-lg navbar-light bg-dark text-light mb-3">
+    <a class="navbar-brand text-light" href="{{ path('wallet_index') }}">Personal wallet</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent text-light">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item ">
+                <a href="{{ path('wallet_new') }}" class="btn btn-outline-primary mx-2">New wallet</a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ path('action_index') }}" class="btn btn-outline-primary mx-2">Action list</a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ path('action_new') }}" class="btn btn-outline-primary mx-2">New action</a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ path('category_new') }}" class="btn btn-outline-primary mx-2">New category</a>
+            </li>
+        </ul>
+        {% if app.user %}
+                <div>
+                    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                        You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+                    {% endif %}
+                </div>
+            {% endif %}
     </div>
-{% endif %}
+</nav>
+
 <div class="container-fluid">
     {% block body %}{% endblock %}
 </div>

@@ -3,7 +3,22 @@
 {% block title %}Action index{% endblock %}
 
 {% block body %}
-    <h1>Action index</h1>
+    <h1>Actions</h1>
+    <form>
+        <div class="input-group mb-3">
+            <input type="text"
+                   name="q"
+                   class="form-control"
+                   placeholder="Category"
+            >
+            <div class="input-group-append">
+                <button type="submit"
+                        class="btn btn-outline-secondary">
+                    <span class="fa fa-search"></span>
+                </button>
+            </div>
+        </div>
+    </form>
 
     <table class="table">
         <thead>
@@ -11,17 +26,19 @@
                 <th>Name</th>
                 <th>Amount</th>
                 <th>Date</th>
+                <th>Wallet</th>
                 <th>Category</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
-        {% for action in actions %}
+        {% for action in actions  %}
             <tr>
 
                 <td>{{ action.name }}</td>
                 <td>{{ action.amount }}</td>
-                <td>{{ action.date|date("m/d/Y") }}</td>
+                <td>{{ action.date|date("d/m/Y") }}</td>
+                <td>{{ action.wallet }}</td>
                 <td>{{ action.category }}</td>
                 <td>
                     <a href="{{ path('action_show', {'id': action.id}) }}">show</a>
@@ -37,5 +54,5 @@
     </table>
 
     <a href="{{ path('action_new') }}" class="btn btn-outline-primary">Create new</a><br><br>
-    <a href="{{ path('wallet_index') }}" class="btn btn-outline-success">Back to wallets</a>
+    <a href="{{ path('wallet_index') }}" class="btn btn-outline-primary">Back to wallets</a>
 {% endblock %}

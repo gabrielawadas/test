@@ -33,6 +33,7 @@ class Wallet
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Action", mappedBy="wallet", orphanRemoval=true)
+     *
      */
     private $Actions;
 

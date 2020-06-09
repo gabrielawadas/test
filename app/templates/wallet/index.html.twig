@@ -3,8 +3,8 @@
 {% block title %}Wallets{% endblock %}
 
 {% block body %}
-    <h1>Wallets</h1>
-    <a href="{{ path('wallet_new') }}" class="btn btn-outline-primary">Create new</a><br><br>
+    <h3>Wallets</h3>
+
 
     <table class="table">
         <thead>
@@ -12,7 +12,6 @@
                 <th>Id</th>
                 <th>Name</th>
                 <th>Balance</th>
-
                 <th>actions</th>
             </tr>
         </thead>
@@ -36,26 +35,5 @@
         </tbody>
     </table>
 
-
-
-<div class="row">
-
-    <div class="col">
-        <a href="{{ path('action_new') }}" class="btn btn-outline-primary">New action</a>
-    </div>
-
-    <div class="col">
-        <a href="{{ path('action_index') }}" class="btn btn-outline-danger">Action list</a>
-    </div>
-
-    <div class="col">
-        <a href="{{ path('category_new') }}" class="btn btn-outline-success">New category</a>
-    </div>
-
-    <div class="col">
-
-    <a href="{{ path('user_index') }}"class="btn btn-outline-info">Admin details</a>
-   </div>
-</div>
 
 {% endblock %}

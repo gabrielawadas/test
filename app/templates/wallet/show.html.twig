@@ -22,13 +22,28 @@
         </tbody>
     </table>
 
-    <a href="{{ path('wallet_index') }}">back to list</a>
-
-    <a href="{{ path('wallet_edit', {'id': wallet.id}) }}">edit</a>
-
-    {{ include('wallet/_delete_form.html.twig') }}
 
 
+    <a href="{{ path('wallet_edit', {'id': wallet.id}) }}" class="btn btn-outline-success">Edit</a><br><br>
+
+    {{ include('wallet/_delete_form.html.twig') }}<br>
+
+
+    <form>
+        <div class="input-group mb-3">
+            <input type="text"
+                   name="q"
+                   class="form-control"
+                   placeholder="Search..."
+            >
+            <div class="input-group-append">
+                <button type="submit"
+                        class="btn btn-outline-secondary">
+                    <span class="fa fa-search"></span>
+                </button>
+            </div>
+        </div>
+    </form>
 
 
     <table class="table">
@@ -38,6 +53,7 @@
             <th>Name</th>
             <th>Amount</th>
             <th>Category</th>
+            <th>Date</th>
             <th>actions</th>
         </tr>
         </thead>
@@ -48,6 +64,7 @@
                 <td>{{ actions.name }}</td>
                 <td>{{ actions.amount }}</td>
                 <td>{{ actions.category }}</td>
+                <td>{{ actions.date|date("d-m-y") }}</td>
                 <td>
                     <a href="{{ path('action_show', {'id': actions.id}) }}">show</a>
                     <a href="{{ path('action_edit', {'id': actions.id}) }}">edit</a>
@@ -60,4 +77,7 @@
         {% endfor %}
         </tbody>
     </table>
+
+    <br><a href="{{ path('wallet_index') }}" class="btn btn-outline-success">Back to wallets</a>
+
 {% endblock %}

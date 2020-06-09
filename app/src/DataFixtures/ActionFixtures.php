@@ -1,24 +1,25 @@
 <?php
 /**
- * Task fixtures.
+ * Action fixtures.
  */
 
 namespace App\DataFixtures;
 
-use App\Entity\Task;
+use App\Entity\Action;
+use App\Entity\Wallet;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
 
 /**
- * Class TaskFixtures.
+ * Class ActionFixtures.
  */
-class TaskFixtures extends Fixture
+class ActionFixtures extends Fixture
 {
     /**
      * Faker.
      *
-     * @var \Fakter\Generator
+     * @var \Faker\Generator
      */
     protected $faker;
 
@@ -40,11 +41,10 @@ class TaskFixtures extends Fixture
         $this->manager = $manager;
 
         for ($i = 0; $i < 10; ++$i) {
-            $task = new Task();
-            $task->setTitle($this->faker->sentence);
-            $task->setCreatedAt($this->faker->dateTimeBetween('-100 days', '-1 days'));
-            $task->setUpdatedAt($this->faker->dateTimeBetween('-100 days', '-1 days'));
-            $this->manager->persist($task);
+            $action = new Action();
+            $action->setName($this->faker->word);
+            $action->setAmount($this->faker->numberBetween());
+            $this->manager->persist($action);
         }
 
         $manager->flush();

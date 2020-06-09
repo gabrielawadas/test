@@ -4,12 +4,12 @@
  */
 
 namespace App\Controller;
-/**
+
+/*
  * Action Controller.
  */
 use App\Entity\Action;
 use App\Form\ActionType;
-use App\Repository\ActionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,10 +23,23 @@ class ActionController extends AbstractController
     /**
      * @Route("/", name="action_index", methods={"GET"})
      */
-    public function index(ActionRepository $actionRepository): Response
+    public function index(Request $request)
     {
+        $actionRepository = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('App:Action');
+
+        $FindAllByCategory = $request->query->get('q');
+
+        if ($FindAllByCategory) {
+            $actions = $actionRepository->FindAllByCategory($FindAllByCategory);
+        } else {
+            $actions = $actionRepository->findAllOrdered();
+        }
+
+
         return $this->render('action/index.html.twig', [
-            'actions' => $actionRepository->findAll(),
+            'actions' => $actions,
         ]);
     }
 
@@ -35,6 +48,10 @@ class ActionController extends AbstractController
      */
     public function new(Request $request): Response
     {
+        $actionRepository = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('App:Action');
+
         $action = new Action();
         $form = $this->createForm(ActionType::class, $action);
         $form->handleRequest($request);
@@ -43,6 +60,7 @@ class ActionController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($action);
             $entityManager->flush();
+
             return $this->redirectToRoute('wallet_index');
         }
 

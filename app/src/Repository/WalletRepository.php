@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Wallet;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\QueryBuilder;
 
 /**
  * @method Wallet|null find($id, $lockMode = null, $lockVersion = null)
@@ -18,6 +19,7 @@ class WalletRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Wallet::class);
     }
+
 
     // /**
     //  * @return Wallet[] Returns an array of Wallet objects

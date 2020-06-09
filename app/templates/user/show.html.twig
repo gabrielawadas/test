@@ -7,12 +7,18 @@
 
     <table class="table">
         <tbody>
-
+            <tr>
+                <th>Id</th>
+                <td>{{ user.id }}</td>
+            </tr>
             <tr>
                 <th>Email</th>
                 <td>{{ user.email }}</td>
             </tr>
-
+            <tr>
+                <th>Roles</th>
+                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+            </tr>
             <tr>
                 <th>Password</th>
                 <td>{{ user.password }}</td>
@@ -20,9 +26,9 @@
         </tbody>
     </table>
 
+    <a href="{{ path('user_index') }}">back to list</a>
 
+    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
 
-    <a href="{{ path('user_edit', {'id': user.id}) }}" class="btn btn-outline-danger">edit</a><br><br>
-
-    <a href="{{ path('wallet_index') }}" class="btn btn-outline-success">Back to wallets</a>
+    {{ include('user/_delete_form.html.twig') }}
 {% endblock %}

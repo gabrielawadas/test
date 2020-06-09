@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Action;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\QueryBuilder;
 
 /**
  * @method Action|null find($id, $lockMode = null, $lockVersion = null)
@@ -14,14 +15,62 @@ use Doctrine\Common\Persistence\ManagerRegistry;
  */
 class ActionRepository extends ServiceEntityRepository
 {
+
+    /**
+     * ActionRepository constructor.
+     * @param ManagerRegistry $registry
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Action::class);
     }
 
-    // /**
-    //  * @return Action[] Returns an array of Action objects
-    //  */
+    /**
+     * @return mixed
+     */
+    public function findAllOrdered()
+    {
+        $qb = $this->createQueryBuilder('a')
+            ->addOrderBy('a.name', 'ASC');
+        $query = $qb->getQuery();
+
+        return $query->execute();
+
+    }
+
+    /**
+     *
+     * @param string $categoryName Category name
+     *
+     * @return QueryBuilder
+     */
+    public function findAllByCategory($categoryName): array
+    {
+         $queryBuilder= $this->createQueryBuilder('a')
+            ->innerJoin('a.category', 'c')
+            ->andWhere('c.name = :category')
+            ->setParameter('category', $categoryName)
+            ->orderBy('a.name', 'ASC');
+
+        return $queryBuilder->getQuery()->execute();
+    }
+
+    /**
+     *
+     * @param string $categoryName Category name
+     *
+     * @return QueryBuilder
+     */
+    public function findAllByDate($date): array
+    {
+        $queryBuilder= $this->createQueryBuilder('a')
+            ->andWhere('a.date = :date')
+            ->setParameter('date', $date)
+            ->orderBy('a.name', 'ASC');
+
+        return $queryBuilder->getQuery()->execute();
+    }
+
     /*
     public function findByExampleField($value)
     {
