@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Action;
+use App\Entity\Wallet;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\QueryBuilder;
@@ -15,10 +16,8 @@ use Doctrine\ORM\QueryBuilder;
  */
 class ActionRepository extends ServiceEntityRepository
 {
-
     /**
      * ActionRepository constructor.
-     * @param ManagerRegistry $registry
      */
     public function __construct(ManagerRegistry $registry)
     {
@@ -35,18 +34,16 @@ class ActionRepository extends ServiceEntityRepository
         $query = $qb->getQuery();
 
         return $query->execute();
-
     }
 
     /**
-     *
      * @param string $categoryName Category name
      *
      * @return QueryBuilder
      */
     public function findAllByCategory($categoryName): array
     {
-         $queryBuilder= $this->createQueryBuilder('a')
+        $queryBuilder = $this->createQueryBuilder('a')
             ->innerJoin('a.category', 'c')
             ->andWhere('c.name = :category')
             ->setParameter('category', $categoryName)
@@ -56,19 +53,52 @@ class ActionRepository extends ServiceEntityRepository
     }
 
     /**
-     *
      * @param string $categoryName Category name
      *
      * @return QueryBuilder
      */
     public function findAllByDate($date): array
     {
-        $queryBuilder= $this->createQueryBuilder('a')
+        $queryBuilder = $this->createQueryBuilder('a')
             ->andWhere('a.date = :date')
             ->setParameter('date', $date)
             ->orderBy('a.name', 'ASC');
 
         return $queryBuilder->getQuery()->execute();
+    }
+
+    /**
+     * Save record.
+     *
+     * @param \App\Entity\Action $action Action entity
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function save(Action $action): void
+    {
+        $this->_em->persist($action);
+        $this->_em->flush($action);
+    }
+
+    /**
+     * Get balance.
+     *
+     * @param \App\Entity\Action  $wallet Action entity
+     * @param \App\Entity\Wallet
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     *
+     */
+    public function getBalance(Wallet $wallet): array
+    {
+        $queryBuilder = $this->createQueryBuilder('action')
+            ->andwhere('action.wallet= :wallet')
+            ->select('SUM(action.amount) AS balance')
+            ->setParameter('wallet', $wallet);
+
+        return $queryBuilder->getQuery()->getOneOrNullResult();
     }
 
     /*

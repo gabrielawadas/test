@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Action;
 use App\Entity\Wallet;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
@@ -20,7 +21,19 @@ class WalletRepository extends ServiceEntityRepository
         parent::__construct($registry, Wallet::class);
     }
 
-
+    /**
+     * Save record.
+     *
+     * @param \App\Entity\Wallet $wallet Wallet entity
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function save(Wallet $wallet): void
+    {
+        $this->_em->persist($wallet);
+        $this->_em->flush($wallet);
+    }
     // /**
     //  * @return Wallet[] Returns an array of Wallet objects
     //  */

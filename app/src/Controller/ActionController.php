@@ -37,7 +37,6 @@ class ActionController extends AbstractController
             $actions = $actionRepository->findAllOrdered();
         }
 
-
         return $this->render('action/index.html.twig', [
             'actions' => $actions,
         ]);
@@ -45,12 +44,17 @@ class ActionController extends AbstractController
 
     /**
      * @Route("/new", name="action_new", methods={"GET","POST"})
+     *
      */
     public function new(Request $request): Response
     {
         $actionRepository = $this->getDoctrine()
             ->getManager()
             ->getRepository('App:Action');
+
+        $walletRepository = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('App:Wallet');
 
         $action = new Action();
         $form = $this->createForm(ActionType::class, $action);
@@ -60,6 +64,12 @@ class ActionController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($action);
             $entityManager->flush();
+
+            $actionRepository->save($action);
+            $wallet = $action->getWallet();
+            $balance = $actionRepository->getBalance($wallet);
+            $wallet->setBalance($balance);
+            $walletRepository->save($wallet);
 
             return $this->redirectToRoute('wallet_index');
         }
