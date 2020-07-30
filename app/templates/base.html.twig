@@ -35,6 +35,8 @@
                 <div>
                     {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                         You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+
+                        <a href="{{ path('user_edit', {id: app.user.id}) }}">User edit</a>
                     {% endif %}
                 </div>
             {% endif %}

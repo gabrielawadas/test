@@ -82,7 +82,7 @@ class Wallet
     /**
      * @return $this
      */
-    public function setBalance(array $balance): self
+    public function setBalance($balance): self
     {
         $this->balance = $balance;
 

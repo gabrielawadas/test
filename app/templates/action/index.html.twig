@@ -19,6 +19,14 @@
             </div>
         </div>
     </form>
+    
+    Search by date range and calculate balance
+    <form action="{{ path('action_search') }}" method="POST">
+        <input type="date" name="date1" />
+        <input type="date" name="date2" />
+        <input type="text" name="wallet" value="provident">
+        <input type="submit" value="Search" />
+    </form>
 
     <table class="table">
         <thead>

@@ -83,6 +83,7 @@ class User implements UserInterface
      * @ORM\Column(type="string")
      */
     private $password;
+    private $plainPassword;
 
     /**
      * Getter for the Id.
@@ -189,5 +190,15 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword($password)
+    {
+        $this->plainPassword = $password;
     }
 }

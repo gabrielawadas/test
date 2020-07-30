@@ -11,6 +11,7 @@ namespace App\Controller;
 use App\Entity\Action;
 use App\Form\ActionType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -61,15 +62,24 @@ class ActionController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($action);
-            $entityManager->flush();
 
-            $actionRepository->save($action);
-            $wallet = $action->getWallet();
-            $balance = $actionRepository->getBalance($wallet);
-            $wallet->setBalance($balance);
-            $walletRepository->save($wallet);
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->getConnection()->beginTransaction();
+            try {
+                $entityManager->persist($action);
+                $entityManager->flush();
+
+                $actionRepository->save($action);
+                $wallet = $action->getWallet();
+                $balance = $actionRepository->getBalance($wallet);
+                $wallet->setBalance($balance['balance']);
+                $walletRepository->save($wallet);
+                $entityManager->getConnection()->commit();
+            } catch (Exception $e) {
+                $entityManager->getConnection()->rollBack();
+                throw $e;
+            }
+
 
             return $this->redirectToRoute('wallet_index');
         }
@@ -122,5 +132,37 @@ class ActionController extends AbstractController
         }
 
         return $this->redirectToRoute('action_index');
+    }
+
+    /**
+     * @Route("/search", name="action_search", methods={"POST"})
+     */
+    public function search(Request $request): Response
+    {
+        $actionRepository = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('App:Action');
+
+//        $wallet = $this->createQueryBuilder('wallet')
+//            ->select('wallet.id')
+//            ->andwhere('wallet.name = :name')
+//            ->setParameter('name', $walletName)->getQuery()->getOneOrNullResult();
+
+        $walletObject = $this->getDoctrine()
+            ->getRepository('App:Wallet')
+            ->findOneBy(array('name' => $request->request->get('wallet')));
+
+        $results = $actionRepository->searchByDates(
+            $request->request->get('date1'),
+            $request->request->get('date2'),
+            $walletObject->getId()
+        );
+
+        return $this->render('action/search.html.twig', [
+//            'action' => $action,
+            'date1' => $request->request->get('date1'),
+            'date2' => $request->request->get('date2'),
+            'results' => $results
+        ]);
     }
 }

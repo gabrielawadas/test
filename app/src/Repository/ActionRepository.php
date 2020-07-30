@@ -101,6 +101,23 @@ class ActionRepository extends ServiceEntityRepository
         return $queryBuilder->getQuery()->getOneOrNullResult();
     }
 
+
+    public function searchByDates($date1, $date2, $wallet): array
+    {
+        if ($wallet) {
+            $queryBuilder = $this->createQueryBuilder('action')
+                ->select('SUM(action.amount) AS balance')
+                ->andwhere('action.date >= :date1')
+                ->andwhere('action.date <= :date2')
+                ->andwhere('action.wallet <= :wallet')
+                ->setParameter('date1', $date1)
+                ->setParameter('date2', $date2)
+                ->setParameter('wallet', $wallet);
+
+            return $queryBuilder->getQuery()->getOneOrNullResult();
+        }
+        return [];
+    }
     /*
     public function findByExampleField($value)
     {
