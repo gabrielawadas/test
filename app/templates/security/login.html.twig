@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}{{ 'login'|trans }}{% endblock %}
 
 {% block body %}
 <form method="post">
@@ -14,16 +14,16 @@
         </div>
     {% endif %}
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputEmail">Email</label>
+<div class="row col-4">
+    <label for="inputEmail">email</label>
     <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" required>
+    <label for="inputPassword">{{ 'password'|trans }}</label>
+    <br><input type="password" name="password" id="inputPassword" class="form-control" required>
 
     <input type="hidden" name="_csrf_token"
            value="{{ csrf_token('authenticate') }}"
     >
-
+</div>
     {#
         Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
         See https://symfony.com/doc/current/security/remember_me.html
@@ -35,8 +35,6 @@
         </div>
     #}
 
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
-    </button>
+   <br> <button class="btn btn-lg btn-primary" type="submit"> {{ 'login'|trans }} </button>
 </form>
 {% endblock %}

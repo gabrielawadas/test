@@ -1,46 +1,52 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Action index{% endblock %}
+{% block title %}{{ 'title_actions_list'|trans }}{% endblock %}
 
 {% block body %}
-    <h1>Actions</h1>
+    {% if pagination is defined and pagination.items|length %}
+    <div class="navigation text-center">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+
+    <h1>{{ 'title_actions_list'|trans }}</h1>
+
+    <div class="row">
+        <div class="col-6">
     <form>
         <div class="input-group mb-3">
-            <input type="text"
-                   name="q"
-                   class="form-control"
-                   placeholder="Category"
-            >
+            <input type="text" name="q" class="form-control" value="{{ 'label_category'|trans }}">
             <div class="input-group-append">
-                <button type="submit"
-                        class="btn btn-outline-secondary">
-                    <span class="fa fa-search"></span>
-                </button>
+                <input class="m-1" type="submit" value="{{ 'search'|trans }}" />
             </div>
         </div>
     </form>
-    
-    Search by date range and calculate balance
+    </div>
+<div class="col-6">
     <form action="{{ path('action_search') }}" method="POST">
         <input type="date" name="date1" />
         <input type="date" name="date2" />
-        <input type="text" name="wallet" value="provident">
-        <input type="submit" value="Search" />
+        <input type="text" name="wallet" value="{{ 'label_wallet'|trans }}">
+        <input type="submit" value="{{ 'search'|trans }}" />
     </form>
+</div>
+    </div>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Name</th>
-                <th>Amount</th>
-                <th>Date</th>
-                <th>Wallet</th>
-                <th>Category</th>
-                <th>actions</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label_name'|trans, 'action.name') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label_amount'|trans, 'action.amount') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label_date'|trans, 'action.date') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label_wallet'|trans, 'action.wallet') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label_category'|trans, 'action.category') }}</th>
+                <th> </th>
+
+
+
             </tr>
         </thead>
         <tbody>
-        {% for action in actions  %}
+        {% for action in pagination.items %}
             <tr>
 
                 <td>{{ action.name }}</td>
@@ -49,8 +55,7 @@
                 <td>{{ action.wallet }}</td>
                 <td>{{ action.category }}</td>
                 <td>
-                    <a href="{{ path('action_show', {'id': action.id}) }}">show</a>
-                    <a href="{{ path('action_edit', {'id': action.id}) }}">edit</a>
+                    <a href="{{ path('action_show', {'id': action.id}) }}">{{ 'show'|trans }}</a>
                 </td>
             </tr>
         {% else %}
@@ -60,6 +65,15 @@
         {% endfor %}
         </tbody>
     </table>
+        <div class="navigation text-center">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+
+    {% else %}
+        <p>
+            {{ 'message_empty_list'|trans }}
+        </p>
+    {% endif %}
 
     <a href="{{ path('action_new') }}" class="btn btn-outline-primary">Create new</a><br><br>
     <a href="{{ path('wallet_index') }}" class="btn btn-outline-primary">Back to wallets</a>

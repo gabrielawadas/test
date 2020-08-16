@@ -1,14 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Action{% endblock %}
+{% block title %}{{ 'label_edit_action'|trans }}{% endblock %}
 
 {% block body %}
-    <h1>Edit Action</h1>
+    <h1>{{ 'label_edit_action'|trans }}</h1>
 
     {{ include('action/_form.html.twig',{'button_label': 'Update'}) }}
 
 
     {{ include('action/_delete_form.html.twig') }}<br>
 
-    <a href="{{ path('wallet_index') }}" class="btn btn-outline-success">Back to wallets</a>
+    <a href="{{ path('wallet_index') }}" class="btn btn-outline-success">{{ 'back'|trans }}</a>
 {% endblock %}

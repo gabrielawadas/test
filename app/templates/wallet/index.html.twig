@@ -1,30 +1,35 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Wallets{% endblock %}
+{% block title %}{{ 'personal_wallet'|trans }}{% endblock %}
 
 {% block body %}
-    <h3>Wallets</h3>
+    {% if pagination is defined and pagination.items|length %}
+    <div class="navigation text-center">
+        {{ knp_pagination_render(pagination) }}
+    </div>
 
+    <h3>{{ 'label_wallets'|trans }}</h3>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Balance</th>
-                <th>actions</th>
+
+                <th>{{ knp_pagination_sortable(pagination, 'label_name'|trans, 'wallet.name') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label_balance'|trans, 'wallet.balance') }}</th>
+                <th> </th>
             </tr>
         </thead>
         <tbody>
-        {% for wallet in wallets %}
+        {% for wallet in pagination.items %}
+
             <tr>
-                <td>{{ wallet.id }}</td>
+
                 <td>{{ wallet.name }}</td>
                 <td>{{ wallet.balance }}</td>
 
                 <td>
-                    <a href="{{ path('wallet_show', {'id': wallet.id}) }}">show</a>
-                    <a href="{{ path('wallet_edit', {'id': wallet.id}) }}">edit</a>
+                    <a href="{{ path('wallet_show', {'id': wallet.id}) }}">{{ 'show'|trans }}</a>
+                    <a href="{{ path('wallet_edit', {'id': wallet.id}) }}">{{ 'edit'|trans }}</a>
                 </td>
             </tr>
         {% else %}
@@ -34,6 +39,15 @@
         {% endfor %}
         </tbody>
     </table>
+    <div class="navigation text-center">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+
+    {% else %}
+        <p>
+            {{ 'message_empty_list'|trans }}
+        </p>
+    {% endif %}
 
 
 {% endblock %}

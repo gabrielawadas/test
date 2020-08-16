@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}Welcome!{% endblock %}</title>
+    <title>{% block title %}{{ 'personal_wallet'|trans }}{% endblock %}</title>
     {% block stylesheets %}
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
@@ -11,7 +11,7 @@
 <body class="bg-light">
 
 <nav class="navbar navbar-expand-lg navbar-light bg-dark text-light mb-3">
-    <a class="navbar-brand text-light" href="{{ path('wallet_index') }}">Personal wallet</a>
+    <a class="navbar-brand text-light" href="{{ path('wallet_index') }}">{{ 'personal_wallet'|trans }}</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -19,24 +19,24 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent text-light">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item ">
-                <a href="{{ path('wallet_new') }}" class="btn btn-outline-primary mx-2">New wallet</a>
+                <a href="{{ path('wallet_new') }}" class="btn btn-outline-primary mx-2">{{ 'label_new_wallet'|trans }}</a>
             </li>
             <li class="nav-item">
-                <a href="{{ path('action_index') }}" class="btn btn-outline-primary mx-2">Action list</a>
+                <a href="{{ path('action_index') }}" class="btn btn-outline-primary mx-2">{{ 'title_actions_list'|trans }}</a>
             </li>
             <li class="nav-item">
-                <a href="{{ path('action_new') }}" class="btn btn-outline-primary mx-2">New action</a>
+                <a href="{{ path('action_new') }}" class="btn btn-outline-primary mx-2">{{ 'label_new_action'|trans }}</a>
             </li>
             <li class="nav-item">
-                <a href="{{ path('category_new') }}" class="btn btn-outline-primary mx-2">New category</a>
+                <a href="{{ path('category_new') }}" class="btn btn-outline-primary mx-2">{{ 'label_new_category'|trans }}</a>
             </li>
         </ul>
         {% if app.user %}
                 <div>
                     {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                        You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+                        {{ 'logged_as'|trans }} {{ app.user.username }}, <a href="{{ path('app_logout') }}">{{ 'logout'|trans }}</a>
 
-                        <a href="{{ path('user_edit', {id: app.user.id}) }}">User edit</a>
+                        <a href="{{ path('user_edit', {id: app.user.id}) }}">{{ 'edit'|trans }} {{ 'password'|trans }}</a>
                     {% endif %}
                 </div>
             {% endif %}

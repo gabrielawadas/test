@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="pl" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="personal_wallet">
+                <source>personal_wallet</source>
+                <target>PORTFEL</target>
+            </trans-unit>
+            <trans-unit id="logout">
+                <source>logout</source>
+                <target>Wyloguj</target>
+            </trans-unit>
+            <trans-unit id="login">
+                <source>login</source>
+                <target>Zaloguj się</target>
+            </trans-unit>
+            <trans-unit id="logged_as">
+                <source>logged_as</source>
+                <target>Jesteś zalogowany jako</target>
+            </trans-unit>
+            <trans-unit id="password">
+                <source>password</source>
+                <target>hasło</target>
+            </trans-unit>
+            <trans-unit id="show">
+                <source>show</source>
+                <target>Szczegóły</target>
+            </trans-unit>
+            <trans-unit id="edit">
+                <source>edit</source>
+                <target>Edytuj</target>
+            </trans-unit>
+            <trans-unit id="back">
+                <source>back</source>
+                <target>Wróć</target>
+            </trans-unit>
+            <trans-unit id="save">
+                <source>save</source>
+                <target>Zapisz</target>
+            </trans-unit>
+            <trans-unit id="delete">
+                <source>delete</source>
+                <target>Usuń</target>
+            </trans-unit>
+            <trans-unit id="label_actions">
+                <source>label_actions</source>
+                <target>Actions</target>
+            </trans-unit>
+            <trans-unit id="label_id">
+                <source>label_id</source>
+                <target>Id</target>
+            </trans-unit>
+            <trans-unit id="label_name">
+                <source>label_name</source>
+                <target>Nazwa</target>
+            </trans-unit>
+            <trans-unit id="label_amount">
+                <source>label_amount</source>
+                <target>Kwota</target>
+            </trans-unit>
+            <trans-unit id="label_date">
+                <source>label_date</source>
+                <target>Data</target>
+            </trans-unit>
+            <trans-unit id="label_balance">
+                <source>label_balance</source>
+                <target>Slado</target>
+            </trans-unit>
+            <trans-unit id="label_wallet">
+                <source>label_wallet</source>
+                <target>Portfel</target>
+            </trans-unit>
+            <trans-unit id="label_wallets">
+                <source>label_wallets</source>
+                <target>Portfele</target>
+            </trans-unit>
+            <trans-unit id="label_new_wallet">
+                <source>label_new_wallet</source>
+                <target>Nowy portfel</target>
+            </trans-unit>
+            <trans-unit id="label_action">
+                <source>label_action</source>
+                <target>Transakcja</target>
+            </trans-unit>
+            <trans-unit id="label_new_action">
+                <source>label_new_action</source>
+                <target>Nowa transakcja</target>
+            </trans-unit>
+            <trans-unit id="label_edit_action">
+                <source>label_edit_action</source>
+                <target>Edytuj transakcję</target>
+            </trans-unit>
+            <trans-unit id="label_category">
+                <source>label_category</source>
+                <target>Kategoria</target>
+            </trans-unit>
+            <trans-unit id="label_new_category">
+                <source>label_new_category</source>
+                <target>Nowa kategoria</target>
+            </trans-unit>
+            <trans-unit id="search">
+                <source>search</source>
+                <target>Szukaj</target>
+            </trans-unit>
+            <trans-unit id="message_empty_list">
+                <source>message_empty_list</source>
+                <target>Pusta lista</target>
+            </trans-unit>
+            <trans-unit id="title_actions_list">
+                <source>title_actions_list</source>
+                <target>Lista transakcji</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

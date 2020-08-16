@@ -6218,20 +6218,20 @@
         },
         {
             "name": "symfony/translation",
-            "version": "v5.0.7",
+            "version": "v5.0.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation.git",
-                "reference": "99b831770e10807dca0979518e2c89edffef5978"
+                "reference": "762090e92d8df2b91cace8930ce0329674600225"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/translation/zipball/99b831770e10807dca0979518e2c89edffef5978",
-                "reference": "99b831770e10807dca0979518e2c89edffef5978",
+                "url": "https://api.github.com/repos/symfony/translation/zipball/762090e92d8df2b91cace8930ce0329674600225",
+                "reference": "762090e92d8df2b91cace8930ce0329674600225",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.2.5",
+                "php": ">=7.2.5",
                 "symfony/polyfill-mbstring": "~1.0",
                 "symfony/translation-contracts": "^2"
             },
@@ -6305,7 +6305,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-03-27T16:56:45+00:00"
+            "time": "2020-06-30T17:40:59+00:00"
         },
         {
             "name": "symfony/translation-contracts",

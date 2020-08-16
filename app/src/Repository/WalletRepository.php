@@ -16,6 +16,21 @@ use Doctrine\ORM\QueryBuilder;
  */
 class WalletRepository extends ServiceEntityRepository
 {
+    /**
+     * Items per page.
+     *
+     * Use constants to define configuration options that rarely change instead
+     * of specifying them in app/config/config.yml.
+     * See https://symfony.com/doc/current/best_practices.html#configuration
+     *
+     * @constant int
+     */
+    const PAGINATOR_ITEMS_PER_PAGE = 10;
+
+    /**
+     * WalletRepository constructor.
+     * @param ManagerRegistry $registry
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Wallet::class);

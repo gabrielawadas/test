@@ -10,11 +10,13 @@ namespace App\Controller;
  */
 use App\Entity\Action;
 use App\Form\ActionType;
+use App\Repository\ActionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * @Route("/action")
@@ -24,13 +26,13 @@ class ActionController extends AbstractController
     /**
      * @Route("/", name="action_index", methods={"GET"})
      */
-    public function index(Request $request)
+    public function index(Request $request, ActionRepository $actionRepository, PaginatorInterface $paginator): Response
     {
-        $actionRepository = $this->getDoctrine()
+
+            $actionRepository = $this->getDoctrine()
             ->getManager()
             ->getRepository('App:Action');
-
-        $FindAllByCategory = $request->query->get('q');
+            $FindAllByCategory = $request->query->get('q');
 
         if ($FindAllByCategory) {
             $actions = $actionRepository->FindAllByCategory($FindAllByCategory);
@@ -38,9 +40,14 @@ class ActionController extends AbstractController
             $actions = $actionRepository->findAllOrdered();
         }
 
-        return $this->render('action/index.html.twig', [
-            'actions' => $actions,
-        ]);
+        return $this->render('action/index.html.twig',
+            [
+                'pagination' => $paginator->paginate(
+                    $actionRepository->findAll(),$request->query->getInt('page', 1),10)
+            ]
+        );
+
+
     }
 
     /**

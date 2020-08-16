@@ -1,5 +1,5 @@
 <form method="post" action="{{ path('wallet_delete', {'id': wallet.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
     <input type="hidden" name="_method" value="DELETE">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ wallet.id) }}">
-    <button class="btn btn-outline-primary" >Delete</button>
+    <button class="btn btn-outline-primary" >{{ 'delete'|trans }}</button>
 </form>

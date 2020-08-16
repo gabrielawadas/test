@@ -3,20 +3,17 @@
 {% block title %}Wallet{% endblock %}
 
 {% block body %}
-    <h1>Wallet</h1>
+    <h1>{{ 'label_wallet'|trans }}</h1>
 
     <table class="table">
         <tbody>
+
             <tr>
-                <th>Id</th>
-                <td>{{ wallet.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
+                <th>{{ 'label_name'|trans }}</th>
                 <td>{{ wallet.name }}</td>
             </tr>
             <tr>
-                <th>Balance</th>
+                <th>{{ 'label_balance'|trans}}</th>
                 <td>{{ wallet.balance }}</td>
             </tr>
         </tbody>
@@ -24,37 +21,22 @@
 
 
 
-    <a href="{{ path('wallet_edit', {'id': wallet.id}) }}" class="btn btn-outline-success">Edit</a><br><br>
+    <a href="{{ path('wallet_edit', {'id': wallet.id}) }}" class="btn btn-outline-success">{{ 'edit'|trans }}</a><br><br>
 
     {{ include('wallet/_delete_form.html.twig') }}<br>
 
 
-    <form>
-        <div class="input-group mb-3">
-            <input type="text"
-                   name="q"
-                   class="form-control"
-                   placeholder="Search..."
-            >
-            <div class="input-group-append">
-                <button type="submit"
-                        class="btn btn-outline-secondary">
-                    <span class="fa fa-search"></span>
-                </button>
-            </div>
-        </div>
-    </form>
 
 
     <table class="table">
         <thead>
         <tr>
 
-            <th>Name</th>
-            <th>Amount</th>
-            <th>Category</th>
-            <th>Date</th>
-            <th>actions</th>
+            <th>{{ 'label_name'|trans }}</th>
+            <th>{{ 'label_amount'|trans }}</th>
+            <th>{{ 'label_category'|trans }}</th>
+            <th>{{ 'label_date'|trans }}</th>
+            <th> </th>
         </tr>
         </thead>
         <tbody>
@@ -66,8 +48,7 @@
                 <td>{{ actions.category }}</td>
                 <td>{{ actions.date|date("d-m-y") }}</td>
                 <td>
-                    <a href="{{ path('action_show', {'id': actions.id}) }}">show</a>
-                    <a href="{{ path('action_edit', {'id': actions.id}) }}">edit</a>
+                    <a href="{{ path('action_show', {'id': actions.id}) }}">{{ 'show'|trans }}</a>
                 </td>
             </tr>
         {% else %}
@@ -78,6 +59,6 @@
         </tbody>
     </table>
 
-    <br><a href="{{ path('wallet_index') }}" class="btn btn-outline-success">Back to wallets</a>
+    <br><a href="{{ path('wallet_index') }}" class="btn btn-outline-success">{{ 'back'|trans }}</a>
 
 {% endblock %}
