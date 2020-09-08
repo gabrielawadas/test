@@ -43,7 +43,7 @@ class ActionController extends AbstractController
         return $this->render('action/index.html.twig',
             [
                 'pagination' => $paginator->paginate(
-                    $actionRepository->findAll(),$request->query->getInt('page', 1),10)
+                   $actions, $request->query->getInt('page',1),10)
             ]
         );
 

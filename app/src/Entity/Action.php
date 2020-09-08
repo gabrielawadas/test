@@ -25,7 +25,7 @@ class Action
     private $name;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="float")
      */
     private $amount;
 
@@ -81,18 +81,18 @@ class Action
     }
 
     /**
-     * @return int|null
+     * @return float|null
      */
-    public function getAmount(): ?int
+    public function getAmount(): ?float
     {
         return $this->amount;
     }
 
     /**
-     * @param int $amount
+     * @param float $amount
      * @return $this
      */
-    public function setAmount(int $amount): self
+    public function setAmount(float $amount): self
     {
         $this->amount = $amount;
 

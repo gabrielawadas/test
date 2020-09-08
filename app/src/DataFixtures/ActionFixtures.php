@@ -44,6 +44,8 @@ class ActionFixtures extends Fixture
             $action = new Action();
             $action->setName($this->faker->word);
             $action->setAmount($this->faker->numberBetween());
+            $action->setDate($this->faker->dateTimeAd());
+
             $this->manager->persist($action);
         }
 

@@ -57,6 +57,9 @@
                 <td>
                     <a href="{{ path('action_show', {'id': action.id}) }}">{{ 'show'|trans }}</a>
                 </td>
+                <td>
+                    <a href="{{ path('action_edit', {'id': action.id}) }}">{{ 'edit'|trans }}</a>
+                </td>
             </tr>
         {% else %}
             <tr>

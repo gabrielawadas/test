@@ -27,7 +27,7 @@ class Wallet
     private $name;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="float")
      */
     private $balance;
 
@@ -72,9 +72,9 @@ class Wallet
     }
 
     /**
-     * @return int|null
+     * @return float|null
      */
-    public function getBalance(): ?int
+    public function getBalance(): ?float
     {
         return $this->balance;
     }
