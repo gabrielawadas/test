@@ -1,58 +1,58 @@
 <?xml version="1.0"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-    <file source-language="pl" datatype="plaintext" original="file.ext">
+    <file source-language="en" datatype="plaintext" original="file.ext">
         <body>
             <trans-unit id="personal_wallet">
                 <source>personal_wallet</source>
-                <target>PORTFEL</target>
+                <target>WALLET</target>
             </trans-unit>
             <trans-unit id="logout">
                 <source>logout</source>
-                <target>Wyloguj</target>
+                <target>Logout</target>
             </trans-unit>
             <trans-unit id="login">
                 <source>login</source>
-                <target>Zaloguj się</target>
+                <target>Sign in</target>
             </trans-unit>
             <trans-unit id="from">
                 <source>from</source>
-                <target>z</target>
+                <target>from</target>
             </trans-unit>
             <trans-unit id="to">
                 <source>to</source>
-                <target>do</target>
+                <target>to</target>
             </trans-unit>
             <trans-unit id="is">
                 <source>is</source>
-                <target>to</target>
+                <target>is</target>
             </trans-unit>
             <trans-unit id="logged_as">
                 <source>logged_as</source>
-                <target>Jesteś zalogowany jako</target>
+                <target>You're logged as</target>
             </trans-unit>
             <trans-unit id="password">
                 <source>password</source>
-                <target>hasło</target>
+                <target>password</target>
             </trans-unit>
             <trans-unit id="show">
                 <source>show</source>
-                <target>Szczegóły</target>
+                <target>show</target>
             </trans-unit>
             <trans-unit id="edit">
                 <source>edit</source>
-                <target>Edytuj</target>
+                <target>Edit</target>
             </trans-unit>
             <trans-unit id="back">
                 <source>back</source>
-                <target>Wróć</target>
+                <target>Back</target>
             </trans-unit>
             <trans-unit id="save">
                 <source>save</source>
-                <target>Zapisz</target>
+                <target>Save</target>
             </trans-unit>
             <trans-unit id="delete">
                 <source>delete</source>
-                <target>Usuń</target>
+                <target>Delete</target>
             </trans-unit>
             <trans-unit id="label_actions">
                 <source>label_actions</source>
@@ -64,67 +64,67 @@
             </trans-unit>
             <trans-unit id="label_name">
                 <source>label_name</source>
-                <target>Nazwa</target>
+                <target>Name</target>
             </trans-unit>
             <trans-unit id="label_amount">
                 <source>label_amount</source>
-                <target>Kwota</target>
+                <target>Amount</target>
             </trans-unit>
             <trans-unit id="label_date">
                 <source>label_date</source>
-                <target>Data</target>
+                <target>Date</target>
             </trans-unit>
             <trans-unit id="label_balance">
                 <source>label_balance</source>
-                <target>Slado</target>
+                <target>Balance</target>
             </trans-unit>
             <trans-unit id="label_wallet">
                 <source>label_wallet</source>
-                <target>Portfel</target>
+                <target>Wallet</target>
             </trans-unit>
             <trans-unit id="label_wallets">
                 <source>label_wallets</source>
-                <target>Portfele</target>
+                <target>Wallets</target>
             </trans-unit>
             <trans-unit id="label_new_wallet">
                 <source>label_new_wallet</source>
-                <target>Nowy portfel</target>
+                <target>New wallet</target>
             </trans-unit>
             <trans-unit id="label_action">
                 <source>label_action</source>
-                <target>Transakcja</target>
+                <target>Transaction</target>
             </trans-unit>
             <trans-unit id="label_new_action">
                 <source>label_new_action</source>
-                <target>Nowa transakcja</target>
+                <target>New transaction</target>
             </trans-unit>
             <trans-unit id="label_edit_action">
                 <source>label_edit_action</source>
-                <target>Edytuj transakcję</target>
+                <target>Edit transaction</target>
             </trans-unit>
             <trans-unit id="label_category">
                 <source>label_category</source>
-                <target>Kategoria</target>
+                <target>Category</target>
             </trans-unit>
             <trans-unit id="label_new_category">
                 <source>label_new_category</source>
-                <target>Nowa kategoria</target>
+                <target>New category</target>
             </trans-unit>
             <trans-unit id="search">
                 <source>search</source>
-                <target>Szukaj</target>
+                <target>Search</target>
             </trans-unit>
             <trans-unit id="message_empty_list">
                 <source>message_empty_list</source>
-                <target>Pusta lista</target>
+                <target>Empty list</target>
             </trans-unit>
             <trans-unit id="title_actions_list">
                 <source>title_actions_list</source>
-                <target>Lista transakcji</target>
+                <target>Transaction list</target>
             </trans-unit>
             <trans-unit id="search_action">
                 <source>search_action</source>
-                <target>Wyszukaj saldo</target>
+                <target>Search balance</target>
             </trans-unit>
         </body>
     </file>

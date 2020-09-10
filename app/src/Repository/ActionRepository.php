@@ -40,7 +40,7 @@ class ActionRepository extends ServiceEntityRepository
     public function findAllOrdered()
     {
         $qb = $this->createQueryBuilder('a')
-            ->addOrderBy('a.name', 'ASC');
+            ->addOrderBy('a.date', 'DESC');
         $query = $qb->getQuery();
 
         return $query->execute();

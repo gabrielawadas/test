@@ -49,6 +49,8 @@
                 <td>{{ actions.date|date("d-m-y") }}</td>
                 <td>
                     <a href="{{ path('action_show', {'id': actions.id}) }}">{{ 'show'|trans }}</a>
+                    <a href="{{ path('action_edit', {'id': actions.id}) }}">{{ 'edit'|trans }}</a>
+
                 </td>
             </tr>
         {% else %}

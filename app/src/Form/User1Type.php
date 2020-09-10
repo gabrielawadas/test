@@ -18,6 +18,7 @@ class User1Type extends AbstractType
 //            ->add('email')
 //            ->add('roles')
             ->add('plainPassword', PasswordType::class, [
+                'label'=> 'password',
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Please enter a password',

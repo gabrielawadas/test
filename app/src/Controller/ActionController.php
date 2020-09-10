@@ -9,14 +9,15 @@ namespace App\Controller;
  * Action Controller.
  */
 use App\Entity\Action;
+use App\Entity\Wallet;
 use App\Form\ActionType;
 use App\Repository\ActionRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * @Route("/action")
@@ -28,11 +29,10 @@ class ActionController extends AbstractController
      */
     public function index(Request $request, ActionRepository $actionRepository, PaginatorInterface $paginator): Response
     {
-
-            $actionRepository = $this->getDoctrine()
+        $actionRepository = $this->getDoctrine()
             ->getManager()
             ->getRepository('App:Action');
-            $FindAllByCategory = $request->query->get('q');
+        $FindAllByCategory = $request->query->get('q');
 
         if ($FindAllByCategory) {
             $actions = $actionRepository->FindAllByCategory($FindAllByCategory);
@@ -43,16 +43,13 @@ class ActionController extends AbstractController
         return $this->render('action/index.html.twig',
             [
                 'pagination' => $paginator->paginate(
-                   $actions, $request->query->getInt('page',1),10)
+                   $actions, $request->query->getInt('page', 1), 10),
             ]
         );
-
-
     }
 
     /**
      * @Route("/new", name="action_new", methods={"GET","POST"})
-     *
      */
     public function new(Request $request): Response
     {
@@ -69,7 +66,6 @@ class ActionController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->getConnection()->beginTransaction();
             try {
@@ -86,7 +82,6 @@ class ActionController extends AbstractController
                 $entityManager->getConnection()->rollBack();
                 throw $e;
             }
-
 
             return $this->redirectToRoute('wallet_index');
         }
@@ -112,13 +107,33 @@ class ActionController extends AbstractController
      */
     public function edit(Request $request, Action $action): Response
     {
+        $actionRepository = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('App:Action');
+
+        $walletRepository = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('App:Wallet');
+
         $form = $this->createForm(ActionType::class, $action);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->getConnection()->beginTransaction();
+            try {
+                $actionRepository->save($action);
+                $wallet = $action->getWallet();
+                $balance = $actionRepository->getBalance($wallet);
+                $wallet->setBalance($balance['balance']);
+                $walletRepository->save($wallet);
+                $entityManager->getConnection()->commit();
+            } catch (Exception $e) {
+                $entityManager->getConnection()->rollBack();
+                throw $e;
+            }
 
-            return $this->redirectToRoute('action_index');
+            return $this->redirectToRoute('wallet_index');
         }
 
         return $this->render('action/edit.html.twig', [
@@ -132,13 +147,27 @@ class ActionController extends AbstractController
      */
     public function delete(Request $request, Action $action): Response
     {
+        $actionRepository = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('App:Action');
+
+        $walletRepository = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('App:Wallet');
+
         if ($this->isCsrfTokenValid('delete'.$action->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
+
+            $actionRepository->save($action);
+            $wallet = $action->getWallet();
+            $balance = $actionRepository->getBalance($wallet);
+            $wallet->setBalance($balance['balance']);
+            $walletRepository->save($wallet);
             $entityManager->remove($action);
             $entityManager->flush();
-        }
 
-        return $this->redirectToRoute('action_index');
+            return $this->redirectToRoute('action_index');
+        }
     }
 
     /**
@@ -157,7 +186,7 @@ class ActionController extends AbstractController
 
         $walletObject = $this->getDoctrine()
             ->getRepository('App:Wallet')
-            ->findOneBy(array('name' => $request->request->get('wallet')));
+            ->findOneBy(['name' => $request->request->get('wallet')]);
 
         $results = $actionRepository->searchByDates(
             $request->request->get('date1'),
@@ -169,7 +198,7 @@ class ActionController extends AbstractController
 //            'action' => $action,
             'date1' => $request->request->get('date1'),
             'date2' => $request->request->get('date2'),
-            'results' => $results
+            'results' => $results,
         ]);
     }
 }

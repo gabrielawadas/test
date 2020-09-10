@@ -3,8 +3,8 @@
 {% block title %}Search Action{% endblock %}
 
 {% block body %}
-    <h1>Search Action</h1>
+    <h1>{{ 'search_action'|trans }}</h1>
 
-    Balance from {{ date1 }} to {{ date2 }} is {{ results['balance']  }}
+    {{ 'label_balance'|trans }} {{ 'from'|trans }}  {{ date1 }} {{ 'to'|trans }} {{ date2 }} {{ 'is'|trans }} {{ results['balance']  }}.
 
 {% endblock %}

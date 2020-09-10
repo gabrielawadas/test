@@ -7,12 +7,11 @@
     <div class="navigation text-center">
         {{ knp_pagination_render(pagination) }}
     </div>
-
+<div class="row">
+    <div class="col-6">
     <h1>{{ 'title_actions_list'|trans }}</h1>
 
-    <div class="row">
-        <div class="col-6">
-    <form>
+        <form>
         <div class="input-group mb-3">
             <input type="text" name="q" class="form-control" value="{{ 'label_category'|trans }}">
             <div class="input-group-append">
@@ -22,6 +21,7 @@
     </form>
     </div>
 <div class="col-6">
+    <h1>{{ 'search_action'|trans }}</h1>
     <form action="{{ path('action_search') }}" method="POST">
         <input type="date" name="date1" />
         <input type="date" name="date2" />
@@ -30,7 +30,7 @@
     </form>
 </div>
     </div>
-
+</div>
     <table class="table">
         <thead>
             <tr>
@@ -59,6 +59,9 @@
                 </td>
                 <td>
                     <a href="{{ path('action_edit', {'id': action.id}) }}">{{ 'edit'|trans }}</a>
+                </td>
+                <td>
+                    <a href="{{ path('action_delete', {'id': action.id}) }}">{{ 'delete'|trans }}</a>
                 </td>
             </tr>
         {% else %}
