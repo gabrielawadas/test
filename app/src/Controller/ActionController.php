@@ -9,7 +9,6 @@ namespace App\Controller;
  * Action Controller.
  */
 use App\Entity\Action;
-use App\Entity\Wallet;
 use App\Form\ActionType;
 use App\Repository\ActionRepository;
 use Knp\Component\Pager\PaginatorInterface;
@@ -177,10 +176,6 @@ class ActionController extends AbstractController
             ->getManager()
             ->getRepository('App:Action');
 
-//        $wallet = $this->createQueryBuilder('wallet')
-//            ->select('wallet.id')
-//            ->andwhere('wallet.name = :name')
-//            ->setParameter('name', $walletName)->getQuery()->getOneOrNullResult();
 
         $walletObject = $this->getDoctrine()
             ->getRepository('App:Wallet')
@@ -193,7 +188,6 @@ class ActionController extends AbstractController
         );
 
         return $this->render('action/search.html.twig', [
-//            'action' => $action,
             'date1' => $request->request->get('date1'),
             'date2' => $request->request->get('date2'),
             'results' => $results,

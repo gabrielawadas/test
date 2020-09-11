@@ -6,7 +6,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ActionRepository")
@@ -22,56 +22,67 @@ class Action
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Type(type="string")
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *     min="3",
+     *     max="64",
+     * )
      */
     private $name;
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\NotBlank
+     *  * @Assert\Length(
+     *    min="1",
+     *    max="255",
+     * )
      */
     private $amount;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Wallet", inversedBy="Actions")
      * @ORM\JoinColumn(name="wallet_id", referencedColumnName="id")
+     * @Assert\NotBlank
      */
     private $wallet;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="action")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
+     * @Assert\NotBlank
      */
     private $category;
 
     /**
      * @ORM\Column(type="date", nullable=true)
+     * @Assert\NotBlank
      */
     private $date;
 
     /**
      * @return mixed
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
     /**
      * @param $id
      */
-    public function setId($id) {
-        $this->id= $id;
+    public function setId($id)
+    {
+        $this->id = $id;
     }
 
-
-    /**
-     * @return string|null
-     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
     /**
-     * @param string $name
      * @return $this
      */
     public function setName(string $name): self
@@ -81,16 +92,12 @@ class Action
         return $this;
     }
 
-    /**
-     * @return float|null
-     */
     public function getAmount(): ?float
     {
         return $this->amount;
     }
 
     /**
-     * @param float $amount
      * @return $this
      */
     public function setAmount(float $amount): self
@@ -100,16 +107,12 @@ class Action
         return $this;
     }
 
-    /**
-     * @return Wallet|null
-     */
     public function getWallet(): ?Wallet
     {
         return $this->wallet;
     }
 
     /**
-     * @param Wallet|null $wallet
      * @return $this
      */
     public function setWallet(?Wallet $wallet): self
@@ -119,16 +122,12 @@ class Action
         return $this;
     }
 
-    /**
-     * @return Category|null
-     */
     public function getCategory(): ?Category
     {
         return $this->category;
     }
 
     /**
-     * @param Category|null $category
      * @return $this
      */
     public function setCategory(?Category $category): self
@@ -138,16 +137,12 @@ class Action
         return $this;
     }
 
-    /**
-     * @return \DateTimeInterface|null
-     */
     public function getDate(): ?\DateTimeInterface
     {
         return $this->date;
     }
 
     /**
-     * @param \DateTimeInterface|null $date
      * @return $this
      */
     public function setDate(?\DateTimeInterface $date): self
@@ -162,18 +157,6 @@ class Action
      */
     public function __toString()
     {
-        // to show the name of the Category in the select
         return $this->name;
-        // to show the id of the Category in the select
-        // return $this->id;
     }
-
-
-
-
-
-
-
-
-
 }

@@ -9,15 +9,10 @@ use App\Entity\Wallet;
 use App\Entity\Category;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\FormTypeInterface;
-
-
-
 
 /**
  * Class ActionType.
@@ -56,7 +51,8 @@ class ActionType extends AbstractType
         $builder->add(
             'date',
             DateType::class,
-            ['label'=>'label_date']
+            ['label'=>'label_date',
+                'format'=> 'dd-MM-yyyy']
 
         );
     }

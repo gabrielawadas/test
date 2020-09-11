@@ -15,8 +15,6 @@ class User1Type extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-//            ->add('email')
-//            ->add('roles')
             ->add('plainPassword', PasswordType::class, [
                 'label'=> 'password',
                 'constraints' => [
@@ -25,8 +23,7 @@ class User1Type extends AbstractType
                     ]),
                     new Length([
                         'min' => 6,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
-                        // max length allowed by Symfony for security reasons
+                        'minMessage' => 'Your password should be at least {{ limit }} ',
                         'max' => 4096,
                     ]),
                 ],
