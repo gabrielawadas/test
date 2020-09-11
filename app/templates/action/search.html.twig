@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Search Action{% endblock %}
+{% block title %}{{ 'search_action'|trans }}{% endblock %}
 
 {% block body %}
     <h1>{{ 'search_action'|trans }}</h1>
 
-    {{ 'label_balance'|trans }} {{ 'from'|trans }}  {{ date1 }} {{ 'to'|trans }} {{ date2 }} {{ 'is'|trans }} {{ results['balance']  }}.
+    {{ 'label_balance'|trans }} {{ 'from'|trans }}  {{ date1 }} {{ 'to'|trans }} {{ date2 }} {{ 'is'|trans }} {{ results['balance'] |format_number({fraction_digit: 2}) }}.
 
 {% endblock %}

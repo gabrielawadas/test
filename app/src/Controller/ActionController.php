@@ -147,27 +147,25 @@ class ActionController extends AbstractController
      */
     public function delete(Request $request, Action $action): Response
     {
-        $actionRepository = $this->getDoctrine()
-            ->getManager()
-            ->getRepository('App:Action');
-
-        $walletRepository = $this->getDoctrine()
-            ->getManager()
-            ->getRepository('App:Wallet');
-
         if ($this->isCsrfTokenValid('delete'.$action->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($action);
+            $entityManager->flush();
 
-            $actionRepository->save($action);
+            $actionRepository = $this->getDoctrine()
+                ->getManager()
+                ->getRepository('App:Action');
+            $walletRepository = $this->getDoctrine()
+                ->getManager()
+                ->getRepository('App:Wallet');
+
             $wallet = $action->getWallet();
             $balance = $actionRepository->getBalance($wallet);
             $wallet->setBalance($balance['balance']);
             $walletRepository->save($wallet);
-            $entityManager->remove($action);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('action_index');
         }
+
+        return $this->redirectToRoute('action_index');
     }
 
     /**
