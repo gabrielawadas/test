@@ -30,8 +30,7 @@
     </form>
 </div>
     </div>
-</div>
-    <table class="table">
+        <table class="table">
         <thead>
             <tr>
                 <th>{{ knp_pagination_sortable(pagination, 'label_name'|trans, 'action.name') }}</th>
@@ -51,7 +50,7 @@
 
                 <td>{{ action.name }}</td>
                 <td>{{ action.amount }}</td>
-                <td>{{ action.date|date("d/m/Y") }}</td>
+                <td>{{ action.date|dateFormat('none', 'short', locale='fr')}}</td>
                 <td>{{ action.wallet }}</td>
                 <td>{{ action.category }}</td>
                 <td>

@@ -4,9 +4,10 @@
  */
 
 namespace App\Form;
+
 use App\Entity\Action;
-use App\Entity\Wallet;
 use App\Entity\Category;
+use App\Entity\Wallet;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -24,36 +25,34 @@ class ActionType extends AbstractType
         $builder->add(
             'name',
             TextType::class,
-            ['label'=>'label_name']);
+            ['label' => 'label_name']);
         $builder->add(
             'amount',
             TextType::class,
-            ['label'=>'label_amount']
+            ['label' => 'label_amount']
             );
         $builder->add(
             'wallet',
             EntityType::class,
-            ['label'=>'label_wallet',
+            ['label' => 'label_wallet',
                 'class' => Wallet::class,
                 'choice_label' => 'name',
-                'placeholder'=>'']
+                'placeholder' => '', ]
             );
         $builder->add(
             'category',
             EntityType::class,
-            ['label'=>'label_category',
+            ['label' => 'label_category',
                 'class' => Category::class,
                 'choice_label' => 'name',
-                'placeholder'=>'']
+                'placeholder' => '', ]
         );
-
 
         $builder->add(
             'date',
             DateType::class,
-            ['label'=>'label_date',
-                'format'=> 'dd-MM-yyyy']
-
+            ['label' => 'label_date',
+                'format' => 'dd-MM-yyyy', ]
         );
     }
 

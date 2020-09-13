@@ -11,11 +11,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-
-
 /**
- * Class WalletType
- * @package App\Form
+ * Class WalletType.
  */
 class WalletType extends AbstractType
 {
@@ -24,17 +21,14 @@ class WalletType extends AbstractType
         $builder->add(
             'name',
             TextType::class,
-            ['label' => 'label_name',]
-
+            ['label' => 'label_name']
         );
 
         $builder->add(
             'balance',
             TextType::class,
-            ['label' => 'label_balance',]
-
+            ['label' => 'label_balance']
         );
-
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -8,6 +8,8 @@ namespace App\Controller;
 use App\Entity\Wallet;
 use App\Form\WalletType;
 use App\Repository\WalletRepository;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,12 +22,24 @@ use Symfony\Component\Routing\Annotation\Route;
 class WalletController extends AbstractController
 {
     /**
-     * @Route("/", name="wallet_index", methods={"GET"})
+     * Index action.
+     *
+     * @param Request            $request          HTTP request
+     * @param WalletRepository   $walletRepository Wallet repository
+     * @param PaginatorInterface $paginator        Paginator
+     *
+     * @return Response HTTP response
+     *
+     * @Route(
+     *     "/",
+     *     methods={"GET"},
+     *     name="wallet_index",
+     * )
      */
     public function index(Request $request, WalletRepository $walletRepository, PaginatorInterface $paginator): Response
     {
         $pagination = $paginator->paginate(
-            $walletRepository->findAll(),
+            $walletRepository->queryAll(),
             $request->query->getInt('page', 1),
             WalletRepository::PAGINATOR_ITEMS_PER_PAGE
         );
@@ -37,26 +51,38 @@ class WalletController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="wallet_new", methods={"GET","POST"})
+     * New wallet.
+     *
+     * @param Request          $request          HTTP request
+     * @param WalletRepository $walletRepository Wallet repository
+     *
+     * @return Response HTTP response
+     *
+     * @throws ORMException
+     * @throws OptimisticLockException
+     *
+     * @Route(
+     *     "/create",
+     *     methods={"GET", "POST"},
+     *     name="wallet_new",
+     * )
      */
-    public function new(Request $request): Response
+    public function create(Request $request, WalletRepository $walletRepository): Response
     {
         $wallet = new Wallet();
         $form = $this->createForm(WalletType::class, $wallet);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($wallet);
-            $entityManager->flush();
+            $walletRepository->save($wallet);
 
             return $this->redirectToRoute('wallet_index');
         }
 
-        return $this->render('wallet/new.html.twig', [
-            'wallet' => $wallet,
-            'form' => $form->createView(),
-        ]);
+        return $this->render(
+            'wallet/new.html.twig',
+            ['form' => $form->createView()]
+        );
     }
 
     /**

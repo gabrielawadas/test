@@ -16,7 +16,7 @@ class User1Type extends AbstractType
     {
         $builder
             ->add('plainPassword', PasswordType::class, [
-                'label'=> 'password',
+                'label' => 'password',
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Please enter a password',

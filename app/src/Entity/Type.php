@@ -80,6 +80,7 @@ class Type
 
         return $this;
     }
+
     /**
      * Generates the magic method.
      */

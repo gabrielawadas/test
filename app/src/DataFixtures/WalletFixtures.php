@@ -9,6 +9,7 @@ use App\Entity\Wallet;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
+use Faker\Generator;
 
 /**
  * Class WalletFixtures.
@@ -18,7 +19,7 @@ class WalletFixtures extends Fixture
     /**
      * Faker.
      *
-     * @var \Faker\Generator
+     * @var Generator
      */
     protected $faker;
 

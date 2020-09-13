@@ -2,6 +2,7 @@
 /**
  * User Controller.
  */
+
 namespace App\Controller;
 
 use App\Entity\User;
@@ -56,23 +57,20 @@ class UserController extends AbstractController
      */
     public function show(User $user): Response
     {
-
         return $this->render('user/show.html.twig', [
             'user' => $user,
         ]);
     }
 
-
     /**
      * @Route("/{id}/edit", name="user_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, User $user,  UserPasswordEncoderInterface $passwordEncoder): Response
+    public function edit(Request $request, User $user, UserPasswordEncoderInterface $passwordEncoder): Response
     {
         $form = $this->createForm(User1Type::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
             $user->setPassword($password);
 

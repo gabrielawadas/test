@@ -31,7 +31,7 @@ class ActionController extends AbstractController
         $actionRepository = $this->getDoctrine()
             ->getManager()
             ->getRepository('App:Action');
-        $FindAllByCategory = $request->query->get('q');
+        $FindAllByCategory = $request -> query -> get ( 'q' );
 
         if ($FindAllByCategory) {
             $actions = $actionRepository->FindAllByCategory($FindAllByCategory);
@@ -175,7 +175,6 @@ class ActionController extends AbstractController
         $actionRepository = $this->getDoctrine()
             ->getManager()
             ->getRepository('App:Action');
-
 
         $walletObject = $this->getDoctrine()
             ->getRepository('App:Wallet')

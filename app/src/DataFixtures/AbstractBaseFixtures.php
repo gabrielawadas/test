@@ -40,8 +40,6 @@ abstract class AbstractBaseFixtures extends Fixture
 
     /**
      * Load.
-     *
-     * @param ObjectManager $manager
      */
     public function load(ObjectManager $manager): void
     {
@@ -53,8 +51,6 @@ abstract class AbstractBaseFixtures extends Fixture
 
     /**
      * Load data.
-     *
-     * @param ObjectManager $manager
      */
     abstract protected function loadData(ObjectManager $manager): void;
 

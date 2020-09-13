@@ -9,6 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * @ORM\Entity(repositoryClass="App\Repository\WalletRepository")
  */
@@ -47,7 +48,6 @@ class Wallet
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Action", mappedBy="wallet", orphanRemoval=true)
-     *
      */
     private $Actions;
 
@@ -59,17 +59,11 @@ class Wallet
         $this->Actions = new ArrayCollection();
     }
 
-    /**
-     * @return int|null
-     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * @return string|null
-     */
     public function getName(): ?string
     {
         return $this->name;
@@ -85,9 +79,6 @@ class Wallet
         return $this;
     }
 
-    /**
-     * @return float|null
-     */
     public function getBalance(): ?float
     {
         return $this->balance;

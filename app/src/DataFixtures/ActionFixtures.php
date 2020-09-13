@@ -6,10 +6,10 @@
 namespace App\DataFixtures;
 
 use App\Entity\Action;
-use App\Entity\Wallet;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
+use Faker\Generator;
 
 /**
  * Class ActionFixtures.
@@ -19,21 +19,21 @@ class ActionFixtures extends Fixture
     /**
      * Faker.
      *
-     * @var \Faker\Generator
+     * @var Generator
      */
     protected $faker;
 
     /**
      * Persistence object manager.
      *
-     * @var \Doctrine\Persistence\ObjectManager
+     * @var ObjectManager
      */
     protected $manager;
 
     /**
      * Load.
      *
-     * @param \Doctrine\Persistence\ObjectManager $manager Persistence object manager
+     * @param ObjectManager $manager Persistence object manager
      */
     public function load(ObjectManager $manager): void
     {

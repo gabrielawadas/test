@@ -1,4 +1,7 @@
 <?php
+/**
+ * Action Repository.
+ */
 
 namespace App\Repository;
 
@@ -6,6 +9,9 @@ use App\Entity\Action;
 use App\Entity\Wallet;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Doctrine\ORM\QueryBuilder;
 
 /**
@@ -26,6 +32,7 @@ class ActionRepository extends ServiceEntityRepository
      * @constant int
      */
     const PAGINATOR_ITEMS_PER_PAGE = 10;
+
     /**
      * ActionRepository constructor.
      */
@@ -80,10 +87,10 @@ class ActionRepository extends ServiceEntityRepository
     /**
      * Save record.
      *
-     * @param \App\Entity\Action $action Action entity
+     * @param Action $action Action entity
      *
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function save(Action $action): void
     {
@@ -94,12 +101,11 @@ class ActionRepository extends ServiceEntityRepository
     /**
      * Get balance.
      *
-     * @param \App\Entity\Action  $wallet Action entity
-     * @param \App\Entity\Wallet
+     * @param Action $wallet Action entity
+     * @param Wallet
      *
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
-     *
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function getBalance(Wallet $wallet): array
     {
@@ -111,7 +117,12 @@ class ActionRepository extends ServiceEntityRepository
         return $queryBuilder->getQuery()->getOneOrNullResult();
     }
 
-
+    /**
+     * @param $date1
+     * @param $date2
+     * @param $wallet
+     * @return array
+     */
     public function searchByDates($date1, $date2, $wallet): array
     {
         if ($wallet) {
@@ -124,10 +135,15 @@ class ActionRepository extends ServiceEntityRepository
                 ->setParameter('date2', $date2)
                 ->setParameter('wallet', $wallet);
 
-            return $queryBuilder->getQuery()->getOneOrNullResult();
+            try {
+                return $queryBuilder->getQuery()->getOneOrNullResult();
+            } catch (NonUniqueResultException $e) {
+            }
         }
+
         return [];
     }
+
     /*
     public function findByExampleField($value)
     {
